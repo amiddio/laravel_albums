@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\V1\ArtistController;
 use App\Http\Controllers\Api\V1\ReleaseTypeController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +21,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
     Route::get('release_types', ReleaseTypeController::class);
+    Route::apiResource('artists', ArtistController::class);
 });
