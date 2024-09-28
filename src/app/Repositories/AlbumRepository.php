@@ -33,9 +33,14 @@ class AlbumRepository extends BaseRepository
     public function getAlbum(int $id): Model
     {
         return $this->instance()
-            ->with(['releaseType', 'artist' => function ($query) {
-                $query->select(['id', 'name']);
-            }])
+            ->with([
+                'releaseType',
+                'tracks' => function ($query) {
+                    $query->orderBy('number');
+                },
+                'artist' => function ($query) {
+                    $query->select(['id', 'name']);
+                }])
             ->where('id', $id)
             ->first();
     }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\AlbumController;
 use App\Http\Controllers\Api\V1\ArtistController;
 use App\Http\Controllers\Api\V1\ReleaseTypeController;
+use App\Http\Controllers\Api\V1\TrackController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +26,5 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('artists', ArtistController::class);
     Route::apiResource('albums', AlbumController::class)->except('index');
     Route::get('albums/{artistId}/{resourceTypeId}', [AlbumController::class, 'index'])->name('albums.index');
+    Route::apiResource('tracks', TrackController::class)->except('index', 'show');
 });

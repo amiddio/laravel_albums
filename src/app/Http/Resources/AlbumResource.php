@@ -28,6 +28,7 @@ class AlbumResource extends JsonResource
             'updated' => $this->when(!$request->routeIs('albums.index'), Carbon::parse($this->updated_at)->format('Y-m-d H:i:s')),
             'releaseType' => ReleaseTypeResource::make($this->whenLoaded('releaseType')),
             'artist' => ArtistResource::make($this->whenLoaded('artist')),
+            'tracks' => TrackResource::collection($this->whenLoaded('tracks')),
         ];
     }
 }

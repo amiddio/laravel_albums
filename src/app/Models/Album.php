@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Album extends Model
 {
@@ -54,5 +55,13 @@ class Album extends Model
     public function artist(): BelongsTo
     {
         return $this->belongsTo(Artist::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function tracks(): HasMany
+    {
+        return $this->hasMany(Track::class);
     }
 }
