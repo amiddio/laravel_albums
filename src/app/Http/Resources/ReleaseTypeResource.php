@@ -16,7 +16,6 @@ class ReleaseTypeResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'slug' => $this->slug,
             'name' => $this->name,
         ];
     }

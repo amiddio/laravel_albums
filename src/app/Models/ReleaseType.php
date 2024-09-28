@@ -17,7 +17,6 @@ class ReleaseType extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'slug',
         'name',
     ];
 
@@ -27,7 +26,6 @@ class ReleaseType extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'slug' => 'string',
         'name' => 'string',
     ];
 
