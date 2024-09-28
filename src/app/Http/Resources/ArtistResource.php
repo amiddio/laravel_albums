@@ -18,10 +18,10 @@ class ArtistResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'genres' => $this->when(!$request->routeIs('artists.index'), $this->genres),
-            'decades' => $this->when(!$request->routeIs('artists.index'), $this->decades),
-            'created' => $this->when(!$request->routeIs('artists.index'), Carbon::parse($this->created_at)->format('Y-m-d H:i:s')),
-            'updated' => $this->when(!$request->routeIs('artists.index'), Carbon::parse($this->updated_at)->format('Y-m-d H:i:s')),
+            'genres' => $this->when(!$request->routeIs(['artists.index', 'albums.*']), $this->genres),
+            'decades' => $this->when(!$request->routeIs(['artists.index', 'albums.*']), $this->decades),
+            'created' => $this->when(!$request->routeIs(['artists.index', 'albums.*']), Carbon::parse($this->created_at)->format('Y-m-d H:i:s')),
+            'updated' => $this->when(!$request->routeIs(['artists.index', 'albums.*']), Carbon::parse($this->updated_at)->format('Y-m-d H:i:s')),
         ];
     }
 }

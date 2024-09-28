@@ -7,7 +7,9 @@ use App\Http\Requests\StoreArtistRequest;
 use App\Http\Requests\UpdateArtistRequest;
 use App\Http\Resources\ArtistResource;
 use App\Repositories\ArtistRepository;
+use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
@@ -52,6 +54,7 @@ class ArtistController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @throws Exception
      */
     public function update(UpdateArtistRequest $request, string $id): JsonResponse
     {
@@ -64,11 +67,12 @@ class ArtistController extends Controller
             return (new ArtistResource($artist))->response()->setStatusCode(200);
         }
 
-        return response()->json(['message' => __('The artist could not be updated.')], 400);
+        throw new Exception(__('The artist with ID:\':id\' could not be updated.', ['id' => $id]));
     }
 
     /**
      * Remove the specified resource from storage.
+     * @throws Exception
      */
     public function destroy(string $id): Response|JsonResponse
     {
@@ -81,6 +85,6 @@ class ArtistController extends Controller
             return response()->noContent();
         }
 
-        return response()->json(['message' => __('The artist could not be removed.')], 400);
+        throw new Exception(__('The artist with ID:\':id\' could not be removed.', ['id' => $id]));
     }
 }
