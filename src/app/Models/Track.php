@@ -12,11 +12,6 @@ class Track extends Model
 
     public $timestamps = false;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'album_id',
         'disc',
@@ -27,11 +22,6 @@ class Track extends Model
         'performers',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'album_id' => 'int',
         'disc' => 'int',
@@ -42,9 +32,6 @@ class Track extends Model
         'performers' => 'string',
     ];
 
-    /**
-     * @return BelongsTo
-     */
     public function album(): BelongsTo
     {
         return $this->belongsTo(Album::class);

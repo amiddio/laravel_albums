@@ -8,11 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class AlbumResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
+
     public function toArray(Request $request): array
     {
         return [
@@ -24,8 +20,14 @@ class AlbumResource extends JsonResource
             'duration' => $this->duration,
             'label' => $this->whenNotNull($this->label),
             'genres' => $this->whenNotNull($this->genres),
-            'created' => $this->when(!$request->routeIs('albums.index'), Carbon::parse($this->created_at)->format('Y-m-d H:i:s')),
-            'updated' => $this->when(!$request->routeIs('albums.index'), Carbon::parse($this->updated_at)->format('Y-m-d H:i:s')),
+            'created' => $this->when(
+                !$request->routeIs('albums.index'),
+                Carbon::parse($this->created_at)->format('Y-m-d H:i:s')
+            ),
+            'updated' => $this->when(
+                !$request->routeIs('albums.index'),
+                Carbon::parse($this->updated_at)->format('Y-m-d H:i:s')
+            ),
             'releaseType' => ReleaseTypeResource::make($this->whenLoaded('releaseType')),
             'artist' => ArtistResource::make($this->whenLoaded('artist')),
             'tracks' => TrackResource::collection($this->whenLoaded('tracks')),

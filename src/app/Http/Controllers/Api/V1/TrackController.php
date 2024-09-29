@@ -15,13 +15,11 @@ use Illuminate\Http\Response;
 class TrackController extends Controller
 {
 
-    public function __construct(protected TrackRepository $trackRepository)
-    {
+    public function __construct(
+        protected TrackRepository $trackRepository
+    ) {
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreTrackRequest $request): JsonResponse
     {
         $track = $this->trackRepository->create($request->validated());
@@ -29,10 +27,6 @@ class TrackController extends Controller
         return (new TrackResource($track))->response()->setStatusCode(201);
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @throws Exception
-     */
     public function update(UpdateTrackRequest $request, string $id)
     {
         $track = $this->trackRepository->find(id: $id);
@@ -44,13 +38,9 @@ class TrackController extends Controller
             return (new TrackResource($track))->response()->setStatusCode(200);
         }
 
-        throw new Exception(__('The track with ID:\':id\' could not be updated.', ['id' => $id]));
+        throw new Exception;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @throws Exception
-     */
     public function destroy(string $id): Response|JsonResponse
     {
         $track = $this->trackRepository->find(id: $id);
@@ -62,6 +52,6 @@ class TrackController extends Controller
             return response()->noContent();
         }
 
-        throw new Exception(__('The track with ID:\':id\' could not be deleted.', ['id' => $id]));
+        throw new Exception;
     }
 }

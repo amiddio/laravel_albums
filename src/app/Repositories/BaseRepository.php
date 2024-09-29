@@ -8,25 +8,15 @@ use Illuminate\Support\Facades\Log;
 
 abstract class BaseRepository
 {
-    /**
-     * @var Model
-     */
     private Model $model;
+
+    abstract protected function getModelClass(): string;
 
     public function __construct()
     {
         $this->model = new ($this->getModelClass());
     }
 
-    /**
-     * @return string
-     */
-    abstract protected function getModelClass(): string;
-
-    /**
-     * @param array $data
-     * @return Model|null
-     */
     public function create(array $data): ?Model
     {
         try {
@@ -37,32 +27,22 @@ abstract class BaseRepository
         return null;
     }
 
-    /**
-     * @return Model
-     */
     protected function instance(): Model
     {
         return $this->model;
     }
 
-    /**
-     * @param Model $instance
-     * @return bool|null
-     */
-    public function delete(Model $instance): ?bool
+    public function delete(Model $instance): bool
     {
         try {
             return $instance->delete();
         } catch (QueryException $exception) {
             Log::error($exception->getMessage());
         }
+
+        return false;
     }
 
-    /**
-     * @param Model $instance
-     * @param array $data
-     * @return Model|null
-     */
     public function update(Model $instance, array $data): ?Model
     {
         try {
@@ -76,10 +56,6 @@ abstract class BaseRepository
         return null;
     }
 
-    /**
-     * @param int $id
-     * @return Model|null
-     */
     public function find(int $id): ?Model
     {
         return $this->instance()->find($id);

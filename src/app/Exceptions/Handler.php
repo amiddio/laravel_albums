@@ -42,11 +42,12 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $e)
     {
         if ($request->isJson()) {
+            $errorMessage = $e->getMessage();
             if ($e instanceof ModelNotFoundException) {
-                return response()->json(['message' => __('Record not found.')], 404);
+                return response()->json(['message' => ($errorMessage ?:  __('Record not found.'))], 404);
             }
             if ($e instanceof Exception) {
-                return response()->json(['message' => $e->getMessage()], 500);
+                return response()->json(['message' => ($errorMessage ?: __('Internal server error.'))], 500);
             }
         }
 

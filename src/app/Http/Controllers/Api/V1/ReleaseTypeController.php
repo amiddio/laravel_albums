@@ -10,13 +10,8 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 class ReleaseTypeController extends Controller
 {
 
-    /**
-     * @param ReleaseTypeRepository $releaseTypeRepository
-     * @return AnonymousResourceCollection
-     */
     public function __invoke(ReleaseTypeRepository $releaseTypeRepository): AnonymousResourceCollection
     {
         return ReleaseTypeResource::collection($releaseTypeRepository->getAll());
     }
-
 }

@@ -18,9 +18,6 @@ class ArtistRepository extends BaseRepository
             ->paginate($perPage, $columns);
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function getModelClass(): string
     {
         return Artist::class;

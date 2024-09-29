@@ -8,9 +8,6 @@ use Illuminate\Database\Eloquent\Collection;
 class ReleaseTypeRepository extends BaseRepository
 {
 
-    /**
-     * @return Collection
-     */
     public function getAll(): Collection
     {
         return $this->instance()
@@ -18,9 +15,6 @@ class ReleaseTypeRepository extends BaseRepository
             ->get();
     }
 
-    /**
-     * @return string
-     */
     protected function getModelClass(): string
     {
         return ReleaseType::class;
