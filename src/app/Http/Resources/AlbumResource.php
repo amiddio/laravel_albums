@@ -2,10 +2,14 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Album;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin Album
+ */
 class AlbumResource extends JsonResource
 {
 
