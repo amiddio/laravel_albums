@@ -31,9 +31,22 @@ services:
     command: --authentication_policy=mysql_native_password
     networks:
       - network_webapp
+  mysql_test:
+    image: mysql:8.0.32
+    restart: always
+    ports:
+      - "3317:3306"
+    env_file:
+      - env/mysql_test.env
+    volumes:
+      - albums_test_db_data:/var/lib/mysql
+    command: --authentication_policy=mysql_native_password
+    networks:
+      - network_webapp
 
 networks:
   network_webapp:
 
 volumes:
   albums_db_data:
+  albums_test_db_data:
