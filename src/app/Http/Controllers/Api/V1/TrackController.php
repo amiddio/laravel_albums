@@ -27,7 +27,7 @@ class TrackController extends Controller
         return (new TrackResource($track))->response()->setStatusCode(201);
     }
 
-    public function update(UpdateTrackRequest $request, string $id)
+    public function update(UpdateTrackRequest $request, string $id): JsonResponse
     {
         $track = $this->trackRepository->find(id: $id);
         if (!$track) {
